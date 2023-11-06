@@ -44,4 +44,16 @@ project "SirenRender"
 		{
 			("{COPY} %{cfg.buldtarget.relpath} ../bin/" .. outputDir .. "/SnadBox")
 		}
-	
+
+
+	filter "configurations:Debug"
+		defines "SR_DEBUG"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "SR_RELEASE"
+		optmize "On"
+
+	filter "configurations:Dist"
+		defines "SR_DIST"
+		optmize "On"
