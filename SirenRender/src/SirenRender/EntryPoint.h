@@ -9,7 +9,6 @@ int main(int argc, char** argv)
 	SR_CORE_WARN("Log Init");
 	SR_INFO("Hello");
 	
-	std::cout << "Render Start" << std::endl;
 	auto app = SirenRender::CreateApplication();
 	app->Run();
 	delete app;
