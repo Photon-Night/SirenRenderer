@@ -1,6 +1,6 @@
 #pragma once
 #include "SirenRender/Core.h"
-#include <string>
+#include <sstream>
 #include <functional>
 
 namespace SirenRender
@@ -10,7 +10,7 @@ namespace SirenRender
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased,KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -18,8 +18,8 @@ namespace SirenRender
 	{
 		None = 0,
 		EventCategoryApplication	= BIT(0),
-		EventCategroyInput			= BIT(1),
-		EventCategroyKeyboard		= BIT(2),
+		EventCategoryInput			= BIT(1),
+		EventCategoryKeyboard		= BIT(2),
 		EventCategoryMouse			= BIT(3),
 		EventCategoryMouseButton	= BIT(4),
 	};

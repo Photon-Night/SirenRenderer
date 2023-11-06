@@ -51,6 +51,15 @@
     <ClInclude Include="src\SirenRender\Core\KeyCode.h">
       <Filter>src\SirenRender\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\SirenRender\Events\ApplicationEvent.h">
+      <Filter>src\SirenRender\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SirenRender\Events\MouseEvent.h">
+      <Filter>src\SirenRender\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SirenRender\Core\MouseCore.h">
+      <Filter>src\SirenRender\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SirenRender\Application.cpp">
