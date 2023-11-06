@@ -60,6 +60,9 @@
     <ClInclude Include="src\SirenRender\Core\MouseCore.h">
       <Filter>src\SirenRender\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\srpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SirenRender\Application.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="src\SirenRender\Log.cpp">
       <Filter>src\SirenRender</Filter>
+    </ClCompile>
+    <ClCompile Include="src\srpch.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 #pragma once
 #include "SirenRender/Core.h"
-#include <sstream>
-#include <functional>
+
 
 namespace SirenRender
 {

@@ -22,17 +22,19 @@
     <ClInclude Include="src\SirenRender\Events\KeyEvent.h" />
     <ClInclude Include="src\SirenRender\Events\MouseEvent.h" />
     <ClInclude Include="src\SirenRender\Log.h" />
+    <ClInclude Include="src\srpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SirenRender\Application.cpp" />
     <ClCompile Include="src\SirenRender\Log.cpp" />
+    <ClCompile Include="src\srpch.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{91266e44-7842-4e44-be88-392ac37e3f70}</ProjectGuid>
     <RootNamespace>SirenRender</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <ProjectName>SirenRender</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
