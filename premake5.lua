@@ -42,7 +42,7 @@ project "SirenRender"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/SnadBox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
 		}
 
 
@@ -74,7 +74,7 @@ project "SandBox"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include",
+		"SirenRender/vendor/spdlog/include",
 		"SirenRender/src"
 	}
 

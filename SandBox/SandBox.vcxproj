@@ -78,7 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SandBoxApp.cpp" />
+    <ClCompile Include="src\SandBoxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SirenRender\SirenRender.vcxproj">
