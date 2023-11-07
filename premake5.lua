@@ -18,6 +18,9 @@ project "SirenRender"
 	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputDir .. "/%{prj.name}")
 
+	pchheader "srpch.h"
+	pchsource "SirenRender/src/srpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -26,13 +29,14 @@ project "SirenRender"
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.22000.0"
+		systemversion "latest"
 
 		defines
 		{
@@ -81,7 +85,7 @@ project "SandBox"
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.22000.0"
+		systemversion "latest"
 
 		defines
 		{

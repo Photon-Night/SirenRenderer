@@ -1,3 +1,4 @@
+#include "srpch.h"
 #include "Application.h"
 namespace SirenRender
 {
