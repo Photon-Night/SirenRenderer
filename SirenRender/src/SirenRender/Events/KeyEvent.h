@@ -1,7 +1,7 @@
 #pragma once
 #include "Event.h"
 #include "SirenRender/Core/KeyCode.h"
-
+#include <sstream>
 
 namespace SirenRender
 {
