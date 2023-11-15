@@ -11,7 +11,7 @@ namespace SirenRender
 		MouseMovedEvent(const float x, const float y)
 			: m_MouseX(x), m_MouseY(y) {}
 
-		std::string ToString()
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseMoveEvent:" << m_MouseX << "," << m_MouseY;
@@ -31,7 +31,7 @@ namespace SirenRender
 		MouseScrollEvent(float x, float y)
 			: m_XOffest(x), m_YOffest(y) {}
 
-		std::string ToString()
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseScrollEvent: " << m_XOffest << "," << m_YOffest;
@@ -75,10 +75,10 @@ namespace SirenRender
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class MouseButtonReleaseEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleaseEvent(const MouseCode button)
+		MouseButtonReleasedEvent(const MouseCode button)
 			: MouseButtonEvent(button) {}
 
 		std::string ToString() const override
