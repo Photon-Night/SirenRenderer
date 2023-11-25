@@ -7,8 +7,8 @@ namespace SirenRender
 	class SIREN_API Layer
 	{
 	public:
-		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		Layer(const std::string& name = "Layer"){};
+		virtual ~Layer(){};
 
 		virtual void OnAttach() {}
 

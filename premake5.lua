@@ -30,13 +30,24 @@ project "SirenRender"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/glfw/include",
+		"%{prj.name}/vendor/glad/include",
+		"%{prj.name}/vendor/glm"
 	}
+
+	libdirs
+	{
+		"%{prj.name}/vendor/glfw/lib"
+	}
+
+	
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
+		
 
 		defines
 		{
@@ -49,10 +60,17 @@ project "SirenRender"
 			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
 		}
 
+		links
+		{
+			"glfw3_mt",
+			"opengl32"
+		}
+
 
 	filter "configurations:Debug"
 		defines "SR_DEBUG"
 		symbols "On"
+		
 
 	filter "configurations:Release"
 		defines "SR_RELEASE"
