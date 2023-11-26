@@ -5,6 +5,8 @@
 #include "SirenRender/Events/MouseEvent.h"
 #include "SirenRender/Events/ApplicationEvent.h"
 
+#include "glad/glad.h"
+
 namespace SirenRender
 {
 	static bool  s_GLFWInitalized = false;
@@ -51,6 +53,11 @@ namespace SirenRender
 		{
 			glfwMakeContextCurrent(m_Window);
 			glfwSetWindowUserPointer(m_Window, &m_Data);
+			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+			{
+				SR_CORE_ERROR("Failed to initialize GLAD");
+				return;
+			}
 			SetVSync(true);
 			glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{

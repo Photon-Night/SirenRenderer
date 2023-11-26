@@ -10,6 +10,12 @@ workspace "SirenRender"
 
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["glfw"] = "SirenRender/vendor/glfw/include"
+IncludeDir["glad"] = "SirenRender/vendor/glad/include"
+
+include "SirenRender/vendor/glad"
+
 project "SirenRender"
 	location "SirenRender"
 	kind "SharedLib"
@@ -31,14 +37,21 @@ project "SirenRender"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/vendor/glfw/include",
-		"%{prj.name}/vendor/glad/include",
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.glad}",
 		"%{prj.name}/vendor/glm"
 	}
 
 	libdirs
 	{
 		"%{prj.name}/vendor/glfw/lib"
+	}
+
+	links
+	{
+		"glfw3_mt.lib",
+		"glad",
+		"opengl32"
 	}
 
 	
@@ -58,12 +71,6 @@ project "SirenRender"
 		postbuildcommands
 		{
 			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
-		}
-
-		links
-		{
-			"glfw3_mt",
-			"opengl32"
 		}
 
 
