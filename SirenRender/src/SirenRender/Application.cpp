@@ -16,12 +16,29 @@ namespace SirenRender
 
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack.PushOverLay(layer);
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		SR_CORE_TRACE("{0}", e);
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNC(OnWindowClose));
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*it--)->OnEvent(e);
+			if(e.Handled)
+				break;
+		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
@@ -37,6 +54,11 @@ namespace SirenRender
 			glClearColor(1.0f, .0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 			m_Window->OnUpdate();
+
+			for (auto* layer : m_LayerStack)
+			{
+				layer->OnUpdate();
+			}
 		}
 	}  
 }
