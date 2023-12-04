@@ -8,21 +8,23 @@ workspace "SirenRender"
 		"Dist"
 	}
 
-outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["glfw"] = "SirenRender/vendor/glfw/include"
 IncludeDir["glad"] = "SirenRender/vendor/glad/include"
+IncludeDir["imgui"] = "SirenRender/vendor/imgui"
 
 include "SirenRender/vendor/glad"
+include "SirenRender/vendor/ImGui"
 
 project "SirenRender"
 	location "SirenRender"
 	kind "SharedLib"
 	language "C++"
 
-	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputDir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "srpch.h"
 	pchsource "SirenRender/src/srpch.cpp"
@@ -39,6 +41,7 @@ project "SirenRender"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
+		"%{IncludeDir.imgui}",
 		"%{prj.name}/vendor/glm"
 	}
 
@@ -50,6 +53,7 @@ project "SirenRender"
 	links
 	{
 		"glfw3_mt.lib",
+		"ImGui",
 		"glad",
 		"opengl32"
 	}
@@ -70,7 +74,7 @@ project "SirenRender"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputDir .. "/Sandbox/\"")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 
@@ -95,8 +99,8 @@ project "SandBox"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputDir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{

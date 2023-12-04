@@ -5,6 +5,7 @@ class SandBox : public SirenRender::Application
 	public:
 		SandBox()
 		{
+			PushOverlay(new SirenRender::GUILayer());
 
 		}
 

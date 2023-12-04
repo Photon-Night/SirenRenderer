@@ -4,11 +4,11 @@
 
 namespace SirenRender
 {
-	class SIREN_API Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		virtual ~Layer() = default;
 		virtual void OnDetach() {}
 		virtual void OnAttach() {}
 		virtual void OnUpdate() {}

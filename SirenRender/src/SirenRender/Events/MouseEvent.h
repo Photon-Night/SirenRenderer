@@ -25,10 +25,10 @@ namespace SirenRender
 		float m_MouseX, m_MouseY;
 	};
 
-	class MouseScrollEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrollEvent(float x, float y)
+		MouseScrolledEvent(float x, float y)
 			: m_XOffest(x), m_YOffest(y) {}
 
 		std::string ToString() const override

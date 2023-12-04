@@ -91,7 +91,7 @@ namespace SirenRender
 					}
 					case GLFW_RELEASE:
 					{
-						KeyReleaseEvent event(key);
+						KeyReleasedEvent event(key);
 						data.Callback(event);
 						break;
 					}
@@ -137,7 +137,7 @@ namespace SirenRender
 			{
 				WindowData data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				MouseScrollEvent event((float)xPos, (float)yPos);
+				MouseScrolledEvent event((float)xPos, (float)yPos);
 				data.Callback(event);
 			});
 

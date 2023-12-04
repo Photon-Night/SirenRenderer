@@ -34,10 +34,10 @@ namespace SirenRender
 		bool m_IsRepeat;
 	};
 
-	class KeyReleaseEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleaseEvent(const KeyCode& keycode)
+		KeyReleasedEvent(const KeyCode& keycode)
 			: KeyEvent(keycode) {}
 		std::string ToString() const override
 		{

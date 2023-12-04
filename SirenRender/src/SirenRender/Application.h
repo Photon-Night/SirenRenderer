@@ -3,6 +3,7 @@
 #include "Events/Event.h"
 #include "Core/Window.h"
 #include "Events/ApplicationEvent.h"
+#include "SirenRender/Core/Assert.h"
 #include "LayerStack.h"
 
 namespace SirenRender
@@ -18,6 +19,9 @@ namespace SirenRender
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+
+		inline static Application& GetInstance() {return *s_Instance;}
+		inline Window& GetWindow() {return *m_Window;}
 	private:
 		std::unique_ptr<Window> m_Window; 
 		bool m_Runing = true;
@@ -25,6 +29,8 @@ namespace SirenRender
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		LayerStack m_LayerStack;
+	private:
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();
