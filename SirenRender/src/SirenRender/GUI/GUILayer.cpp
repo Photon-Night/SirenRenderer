@@ -1,9 +1,11 @@
 #include "srpch.h"
+#include "glad/glad.h"
 #include "GUILayer.h"
 
 #include "imgui.h"
-#include "SirenRender/Platform/OpenGL/ImGuiOpenGLRender.h"
-
+#include "examples/imgui_impl_glfw.h"
+#include "examples/imgui_impl_opengl3.h"
+#include "examples/imgui_impl_opengl3_loader.h"
 #include "glfw3.h"
 #include "SirenRender/Application.h"
 
@@ -22,82 +24,65 @@ namespace SirenRender
 
 	void GUILayer::OnDetach()
 	{
-		
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
 	}
 
 	void GUILayer::OnAttach()
 	{
+		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
 		ImGui::StyleColorsDark();
 
-		ImGuiIO& io = ImGui::GetIO();
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
 
+		Application& app = Application::GetInstance();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-	void GUILayer::OnUpdate()
+	void GUILayer::OnGuiRender()
 	{
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
+	}
 
+	void GUILayer::Begin()
+	{
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void GUILayer::End()
+	{
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::GetInstance();
 		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
-
-		float time = (float)glfwGetTime();
-		io.DeltaTime = m_Time > 0.0 ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time = time;
-
-		ImGui_ImplOpenGL3_NewFrame();
-		//ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
 
-	void GUILayer::OnEvent(Event& event)
-	{
-		EventDispatcher dispatcher(event);
-		//dispatcher.Dispatch<Mouse>
-	}
-
-	bool GUILayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& event)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& event)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnMouseMovedEvent(MouseMovedEvent& event)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnMouseScrolledEvent(MouseScrolledEvent& event)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnKeyPressedEvent(KeyPressedEvent& evnet)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnKeyReleasedEvent(KeyReleasedEvent& evnet)
-	{
-		return false;
-	}
-
-	bool GUILayer::OnWindowResizeEvent(WindowResizeEvent& event)
-	{
-		return false;
-	}
 }

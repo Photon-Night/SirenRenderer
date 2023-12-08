@@ -11,6 +11,7 @@ namespace SirenRender
 		virtual ~Layer() = default;
 		virtual void OnDetach() {}
 		virtual void OnAttach() {}
+		virtual void OnGuiRender() {}
 		virtual void OnUpdate() {}
 		virtual void OnEvent(Event& event) {}
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "SirenRender/Core/MouseCore.h"
+#include "SirenRender/Core/MouseCode.h"
 
 namespace SirenRender
 {
@@ -17,6 +17,9 @@ namespace SirenRender
 			ss << "MouseMoveEvent:" << m_MouseX << "," << m_MouseY;
 			return ss.str();
 		}
+
+		float GetX() const {return m_MouseX;}
+		float GetY() const {return m_MouseY;}
 
 		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
@@ -37,6 +40,9 @@ namespace SirenRender
 			ss << "MouseScrollEvent: " << m_XOffest << "," << m_YOffest;
 			return ss.str();
 		}
+
+		float GetXOffest() const {return m_XOffest;}
+		float GetYOffest() const {return m_YOffest;}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)

@@ -5,6 +5,7 @@
 #include "Events/ApplicationEvent.h"
 #include "SirenRender/Core/Assert.h"
 #include "LayerStack.h"
+#include "SirenRender/GUI/GUILayer.h"
 
 namespace SirenRender
 {
@@ -24,6 +25,7 @@ namespace SirenRender
 		inline Window& GetWindow() {return *m_Window;}
 	private:
 		std::unique_ptr<Window> m_Window; 
+		GUILayer* m_GuiLayer;
 		bool m_Runing = true;
 
 		bool OnWindowClose(WindowCloseEvent& e);

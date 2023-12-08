@@ -8,7 +8,7 @@ namespace SirenRender
 	class SIREN_API LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 		
 		void PushLayer(Layer* layer);
@@ -28,7 +28,7 @@ namespace SirenRender
 
 	private:
 		std::vector<Layer*> m_Layers;
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 	};
 }
 

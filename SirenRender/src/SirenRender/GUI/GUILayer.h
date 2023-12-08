@@ -4,6 +4,7 @@
 #include "SirenRender/Events/KeyEvent.h"
 #include "SirenRender/Events/ApplicationEvent.h"
 
+
 namespace SirenRender
 {
 	class SIREN_API GUILayer : public Layer
@@ -12,19 +13,12 @@ namespace SirenRender
 		GUILayer();
 		~GUILayer();
 
-		void OnDetach();
-		void OnAttach();
-		void OnUpdate();
-		void OnEvent(Event& event);
+		virtual void OnDetach() override;
+		virtual void OnAttach() override;
+		virtual void OnGuiRender() override; 
 
-	private:
-		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& event);
-		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
-		bool OnMouseMovedEvent(MouseMovedEvent& event);
-		bool OnMouseScrolledEvent(MouseScrolledEvent& event);
-		bool OnKeyPressedEvent(KeyPressedEvent& evnet);
-		bool OnKeyReleasedEvent(KeyReleasedEvent& evnet);
-		bool OnWindowResizeEvent(WindowResizeEvent& event);
+		void Begin();
+		void End();
 	private:
 		float m_Time = 0.0f;
 	};

@@ -49,10 +49,10 @@ namespace SirenRender
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class KeyTypeEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypeEvent(const KeyCode& keycode)
+		KeyTypedEvent(const KeyCode& keycode)
 			: KeyEvent(keycode) {}
 
 		std::string ToString() const override
