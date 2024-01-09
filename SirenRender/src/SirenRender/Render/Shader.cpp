@@ -5,8 +5,8 @@
 
 namespace SirenRender
 {
-	Shader::Shader(const std::string& vertPath, const std::string& fragPath)
-	{
+    Shader::Shader(const std::string& vertPath, const std::string& fragPath)
+    {
         std::string vertexCode;
         std::string fragmentCode;
         std::ifstream vShaderFile;
@@ -59,7 +59,7 @@ namespace SirenRender
 
         glDeleteShader(vertex);
         glDeleteShader(fragment);
-	}
+    }
 
 	Shader::~Shader()
 	{
