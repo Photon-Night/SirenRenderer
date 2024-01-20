@@ -2,11 +2,15 @@
 #include "glad/glad.h"
 #include "Application.h"
 #include "glfw3.h"
+#include "Render/RenderCommand.h"
+#include "Render/Renderer.h"
 
 namespace SirenRender
 {
 
 	Application* Application::s_Instance = nullptr;
+
+	
 	
 	Application::Application()
 	{  
@@ -62,8 +66,15 @@ namespace SirenRender
 	{	
 		while (m_Runing)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+			RenderCommand::Clear();
+
+			
+			Renderer::BeginScene();
+
+
+			Renderer::EndScene();
+
 
 			for (Layer* layer : m_LayerStack)  
 			{

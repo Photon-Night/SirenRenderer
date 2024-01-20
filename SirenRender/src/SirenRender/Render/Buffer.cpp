@@ -10,10 +10,10 @@ namespace SirenRender
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
 		}
 
-		SR_CORE_ASSERTS(false, "Unknow RendererAPI");
+		SR_CORE_ASSERTS(false, "[VectorBuffer] <Create> Unknown RendererAPI");
 
 		return nullptr;
 	}
@@ -22,10 +22,10 @@ namespace SirenRender
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::OpenGL:		return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::OpenGL:		return new OpenGLIndexBuffer(indices, size);
 		}
 
-		SR_CORE_ASSERTS(false, "Unknow RendererAPI");
+		SR_CORE_ASSERTS(false, "[IndexBuffer] <Create> Unknown RendererAPI");
 
 		return nullptr;
 	}
