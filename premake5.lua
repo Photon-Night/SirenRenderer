@@ -1,4 +1,4 @@
-workspace "SirenRender"
+workspace "SirenRenderer"
 	architecture "x64"
 	startproject "SandBox"
 	configurations
@@ -11,16 +11,17 @@ workspace "SirenRender"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
-IncludeDir["glfw"] = "SirenRender/vendor/glfw/include"
-IncludeDir["glad"] = "SirenRender/vendor/glad/include"
-IncludeDir["imgui"] = "SirenRender/vendor/imgui"
-IncludeDir["glm"] = "SirenRender/vendor/glm"
+IncludeDir["glfw"] = "SirenRenderer/vendor/glfw/include"
+IncludeDir["glad"] = "SirenRenderer/vendor/glad/include"
+IncludeDir["imgui"] = "SirenRenderer/vendor/imgui"
+IncludeDir["glm"] = "SirenRenderer/vendor/glm"
+IncludeDir["stb_image"] = "SirenRenderer/vendor/stb_image"
 
-include "SirenRender/vendor/glad"
-include "SirenRender/vendor/ImGui"
+include "SirenRenderer/vendor/glad"
+include "SirenRenderer/vendor/ImGui"
 
-project "SirenRender"
-	location "SirenRender"
+project "SirenRenderer"
+	location "SirenRenderer"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
@@ -30,14 +31,16 @@ project "SirenRender"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "srpch.h"
-	pchsource "SirenRender/src/srpch.cpp"
+	pchsource "SirenRenderer/src/srpch.cpp"
 
 	files
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"{prj.name}/vendor/glm/glm/**.hpp",
-		"{prj.name}/vendor/glm/glm/**.inl"
+		"{prj.name}/vendor/glm/glm/**.inl",
+		"{prj.name}/vendor/stb_image/**.h",
+		"{prj.name}/vendor/stb_image/**.cpp"
 	}
 
 	includedirs
@@ -47,7 +50,8 @@ project "SirenRender"
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	libdirs
@@ -117,9 +121,9 @@ project "SandBox"
 
 	includedirs
 	{
-		"SirenRender/vendor/spdlog/include",
-		"SirenRender/src",
-		"SirenRender/vendor",
+		"SirenRenderer/vendor/spdlog/include",
+		"SirenRenderer/src",
+		"SirenRenderer/vendor",
 		"%{IncludeDir.glm}"
 	}
 
@@ -135,7 +139,7 @@ project "SandBox"
 
 		links
 		{
-			"SirenRender"
+			"SirenRenderer"
 		}
 
 

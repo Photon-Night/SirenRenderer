@@ -1,6 +1,6 @@
-#include <SirenRender.h>
+#include <SirenRenderer.h>
 
-class SandBox : public SirenRender::Application
+class SandBox : public SirenRenderer::Application
 {
 	public:
 		SandBox()
@@ -15,7 +15,7 @@ class SandBox : public SirenRender::Application
 		}
 };
 
-SirenRender::Application* SirenRender::CreateApplication()
+SirenRenderer::Application* SirenRenderer::CreateApplication()
 {
 	return new SandBox();
 }
