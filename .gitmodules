@@ -1,9 +1,9 @@
 [submodule "SirenRender/vendor/spdlog"]
-	path = SirenRender/vendor/spdlog
+	path = SirenRenderer/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "SirenRender/vendor/imgui"]
-	path = SirenRender/vendor/imgui
+[submodule "SirenRenderer/vendor/imgui"]
+	path = SirenRenderer/vendor/imgui
 	url = https://github.com/TheCherno/imgui
 [submodule "SirenRender/vendor/glm"]
-	path = SirenRender/vendor/glm
+	path = SirenRenderer/vendor/glm
 	url = https://github.com/g-truc/glm
