@@ -1,9 +1,0 @@
-[submodule "SirenRenderer/vendor/spdlog"]
-	path = SirenRenderer/vendor/spdlog
-	url = https://github.com/gabime/spdlog
-[submodule "SirenRenderer/vendor/imgui"]
-	path = SirenRenderer/vendor/imgui
-	url = https://github.com/TheCherno/imgui
-[submodule "SirenRenderer/vendor/glm"]
-	path = SirenRenderer/vendor/glm
-	url = https://github.com/g-truc/glm
