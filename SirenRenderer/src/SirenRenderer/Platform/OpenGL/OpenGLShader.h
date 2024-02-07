@@ -1,4 +1,6 @@
 #pragma once
+#include "glad/glad.h"
+#include "glfw3.h"
 #include "SirenRenderer/Render/Shader.h"
 
 typedef unsigned int GLenum;
@@ -36,6 +38,7 @@ namespace SirenRenderer
 
 		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+		GLint GetUniformLocation(const std::string& name);
 	private:
 		std::string& ReadFile(const std::string& filepath);
 		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
@@ -48,6 +51,7 @@ namespace SirenRenderer
 		std::string m_FilePath;
 		std::string m_Name;
 
+		std::unordered_map<std::string, GLint> m_UniformLocationCache;
 		std::unordered_map<GLenum, std::vector<uint32_t>> m_OpenGLSPIRV;
 		std::unordered_map<GLenum, std::string> m_OpenGLSourceCode;
 

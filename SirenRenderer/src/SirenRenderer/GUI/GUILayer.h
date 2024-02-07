@@ -10,7 +10,7 @@ namespace SirenRenderer
 	class SIREN_API GUILayer : public Layer
 	{
 	public:
-		GUILayer();
+		GUILayer(const std::string name = "GuiLayer");
 		~GUILayer();
 
 		virtual void OnDetach() override;

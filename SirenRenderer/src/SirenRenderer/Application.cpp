@@ -4,24 +4,27 @@
 #include "glfw3.h"
 #include "Render/RenderCommand.h"
 #include "Render/Renderer.h"
+#include "imgui.h"
 
 namespace SirenRenderer
 {
 
 	Application* Application::s_Instance = nullptr;
-
 	
-	
-	Application::Application()
+	Application::Application(const ApplicationProps& props)
 	{  
 		SR_CORE_ASSERTS(!s_Instance, "Application already exists");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = std::unique_ptr<Window>(Window::Create(WindowProps(props.Name, props.WindowWidth, props.WindowHeight)));
 		m_Window->SetEventCallBack(SR_BIND_EVENT_FUNC(Application::OnEvent));
+		m_Window->SetVSync(false);
 
-		m_GuiLayer = new GUILayer();
+		m_GuiLayer = new GUILayer("ImGuiLayer");
 		PushOverlay(m_GuiLayer);
+
+		Renderer::Init();
+		//Renderer::WaitAndRender();
 	}
 
 	Application:: ~Application()
@@ -39,6 +42,16 @@ namespace SirenRenderer
 	{
 		m_LayerStack.PushOverLay(layer);
 		layer->OnAttach();
+	}
+
+	void Application::RenderGui()
+	{
+		m_GuiLayer->Begin();
+
+		ImGui::Begin("Renderer");
+		auto& caps = RendererAPI::GetCapabilities();
+		ImGui::Text("Vendor : %s", caps.Vendor.c_str())
+
 	}
 
 	void Application::OnEvent(Event& e)

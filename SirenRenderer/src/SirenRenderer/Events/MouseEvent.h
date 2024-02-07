@@ -41,8 +41,8 @@ namespace SirenRenderer
 			return ss.str();
 		}
 
-		float GetXOffest() const {return m_XOffest;}
-		float GetYOffest() const {return m_YOffest;}
+		float GetXOffset() const {return m_XOffest;}
+		float GetYOffset() const {return m_YOffest;}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)

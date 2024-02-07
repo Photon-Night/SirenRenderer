@@ -10,31 +10,47 @@
 
 namespace SirenRenderer
 {
+	struct ApplicationProps
+	{
+		std::string Name;
+		uint32_t WindowWidth, WindowHeight;
+	};
+
+
 	class SIREN_API Application
 	{
 	public:
-		Application();
+		Application(const ApplicationProps& props = {"Siren Renderer", 1280, 70});
 		~Application();
 
 		void Run();
-		void OnEvent(Event& e);
+
+		virtual void OnInit();
+		virtual void OnShutdown();
+		virtual void OnUpdate(Timestep ts);
+		virtual void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+		void RenderGui();
+
+		std::string OpenFile(const std::string& filter) const;
 
 		inline static Application& GetInstance() {return *s_Instance;}
 		inline Window& GetWindow() {return *m_Window;}
-	private:
-		Scope<Window> m_Window; 
-		GUILayer* m_GuiLayer;
-		bool m_Runing = true;
+		float GetTime() const;
 
+	private:
+		bool OnWindowResize(WindowResizeEvent& e);
 		bool OnWindowClose(WindowCloseEvent& e);
 	private:
-		Timestep m_Timestep;
+		Scope<Window> m_Window; 
 		LayerStack m_LayerStack;
+		GUILayer* m_GuiLayer;
+		Timestep m_Timestep;
+		bool m_Runing = true;
+		bool m_Minimized = false;
 		float m_LastFrameTime = 0.0f;
-	private:
 		static Application* s_Instance;
 	};
 

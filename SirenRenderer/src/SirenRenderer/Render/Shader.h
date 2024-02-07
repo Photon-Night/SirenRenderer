@@ -21,7 +21,6 @@ namespace SirenRenderer
 		virtual void SetFloat4(const std::string& name, const glm::vec4& value);
 		virtual void SetMat4(const std::string& name, const glm::mat4& value);
 		virtual const std::string& GetName() const;
-
 		static Ref<Shader> Create(const std::string& filepath);
 		static Ref<Shader> Create(const std::string& name, const std::string& vertexSrc, const std::string& fargmentSec);
 	};

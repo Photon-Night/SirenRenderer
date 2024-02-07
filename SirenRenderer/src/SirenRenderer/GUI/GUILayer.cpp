@@ -11,8 +11,8 @@
 
 namespace SirenRenderer
 {
-	GUILayer::GUILayer()
-		: Layer("GUILayer")
+	GUILayer::GUILayer(std::string name)
+		: Layer(name)
 	{
 
 	}
@@ -33,6 +33,7 @@ namespace SirenRenderer
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
+		ImGui::SetCurrentContext(ImGui::GetCurrentContext());
 		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;

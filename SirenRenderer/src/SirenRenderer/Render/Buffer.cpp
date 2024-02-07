@@ -6,27 +6,37 @@
 
 namespace SirenRenderer
 {
-	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(void* data, uint32_t size, VertexBufferUsage usage)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::GetAPI())
 		{
-			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLVertexBuffer>(vertices, size);
+		case RendererAPI::API::None:    return nullptr;
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLVertexBuffer>(data, size, usage);
 		}
-
-		SR_CORE_ASSERTS(false, "[VectorBuffer] <Create> Unknown RendererAPI");
-
+		SR_CORE_ASSERTS(false, "Unknown RendererAPI");
 		return nullptr;
 	}
 
-	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size, VertexBufferUsage usage)
 	{
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::GetAPI())
 		{
-		case RendererAPI::API::OpenGL:			return CreateRef<OpenGLIndexBuffer>(indices, size);
+		case RendererAPI::API::None:    return nullptr;
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLVertexBuffer>(size, usage);
 		}
-
-		SR_CORE_ASSERTS(false, "[IndexBuffer] <Create> Unknown RendererAPI");
-
+		SR_CORE_ASSERTS(false, "Unknown RendererAPI");
 		return nullptr;
+	}
+
+	Ref<IndexBuffer> IndexBuffer::Create(void* data, uint32_t size)
+	{
+		switch (RendererAPI::GetAPI())
+		{
+		case RendererAPI::API::None:    return nullptr;
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLIndexBuffer>(data, size);
+		}
+		SR_CORE_ASSERTS(false, "Unknown RendererAPI");
+		return nullptr;
+
 	}
 }

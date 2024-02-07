@@ -59,6 +59,8 @@ namespace SirenRenderer
 		uint32_t offest;
 		bool normalized;
 
+		BufferElement() = default;
+
 		BufferElement(ShaderDataType type, const std::string name, uint32_t size = 0, uint32_t offest = 0, bool normalized = false)
 			: name(name), type(type), size(size), offest(offest), normalized(normalized)
 		{
@@ -98,6 +100,8 @@ namespace SirenRenderer
 				break;
 			}
 
+			SR_CORE_ASSERTS(false, "[Buffer] <GetComponentCount> Unknown ShaderDataType");
+
 			return 0;
 		}
 	};
@@ -105,8 +109,6 @@ namespace SirenRenderer
 	class BufferLayout
 	{
 	public:
-		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
-		inline const uint32_t GetStride() const { return m_Stride; }
 		BufferLayout() = default;
 
 		BufferLayout(const std::initializer_list<BufferElement>& element)
@@ -114,6 +116,9 @@ namespace SirenRenderer
 		{
 			CalculateOffestAndStride();
 		}
+
+		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
+		inline const uint32_t GetStride() const { return m_Stride; }
 
 		std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
 		std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
@@ -133,7 +138,12 @@ namespace SirenRenderer
 		}
 	private:
 		std::vector<BufferElement> m_Elements;
-		uint32_t m_Stride;
+		uint32_t m_Stride = 0;
+	};
+
+	enum class VertexBufferUsage
+	{
+		None = 0, Static = 1, Dynamic = 2
 	};
 
 	class VertexBuffer
@@ -141,26 +151,34 @@ namespace SirenRenderer
 	public:
 		virtual ~VertexBuffer() {}
 
+		virtual void SetData(void* buffer, uint32_t size, uint32_t offest = 0) = 0;
 		virtual void Bind() const= 0;
 		virtual void Unbind() const= 0;
 
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 
-		static Ref<VertexBuffer> Create(float* vertices, uint32_t size);
+		virtual unsigned int GetSize() const = 0;
+		virtual RendererID GetRendererID() const = 0;
+
+		static Ref<VertexBuffer> Create(void* data, uint32_t size, VertexBufferUsage usage = VertexBufferUsage::Static);
+		static Ref<VertexBuffer> Create(uint32_t size, VertexBufferUsage usage = VertexBufferUsage::Dynamic);
 	};
 
 	class IndexBuffer
 	{
 	public:
-		virtual ~IndexBuffer(){}
+		virtual ~IndexBuffer() {}
 
+		virtual void SetData(void* buffer, uint32_t size, uint32_t offset = 0) = 0;
 		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
 		virtual uint32_t GetCount() const = 0;
 
-		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
+		virtual unsigned int GetSize() const = 0;
+		virtual RendererID GetRendererID() const = 0;
+
+		static Ref<IndexBuffer> Create(void* data, uint32_t size = 0);
 	};
 }
 
